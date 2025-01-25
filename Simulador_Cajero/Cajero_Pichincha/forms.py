@@ -1,6 +1,7 @@
 # forms.py
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from .models import User, Account
 
 class CustomUserCreationForm(UserCreationForm):
@@ -11,10 +12,10 @@ class CustomUserCreationForm(UserCreationForm):
 class AccountCreationForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ('account_number', 'account_type', 'funds')
-        
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+        fields = ['account_type']
+        labels = {
+            'account_type': 'Tipo de cuenta',
+        }
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

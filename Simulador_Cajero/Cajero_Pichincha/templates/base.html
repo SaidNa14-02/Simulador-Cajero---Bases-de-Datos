@@ -6,24 +6,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Banco Pichincha{% endblock %}</title>
         <link href="{% static 'pichincha_theme.min.css' %}" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" rel="noopener noreferrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         <link href="{% static 'styles.css' %}" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     </head>
     <body>
         <nav class="navbar bg-primary navbar-custom w-100">
             <div class="container-fluid d-flex justify-content-between align-items-center">
-                <a class="navbar-brand">
+                <a class="navbar-brand" href="{% url 'Cajero_Pichincha:index' %}">
                     <img src="{% static 'banner_pichincha.png' %}" alt="Pichincha Banner" title="Pichincha Banner" class="banner-img">
                 </a>
                 <div class="d-flex justify-content-end {% block navbar_class %}{% endblock navbar_class %}">
                     <ul class="nav">
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link nav-link-custom" style="font-size: 20px" href="/">Cerrar Sesión</a>
+                                <a class="nav-link nav-link-custom" style="font-size: 20px" href="{% url 'Cajero_Pichincha:logout' %}">Cerrar Sesión</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
                                 <a class="nav-link nav-link-custom" href="{% url 'Cajero_Pichincha:login' %}">Iniciar Sesión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-custom" href="{% url 'Cajero_Pichincha:register' %}">Registrarse</a>
                             </li>
                         {% endif %}
                     </ul>

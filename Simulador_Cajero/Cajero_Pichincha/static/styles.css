@@ -47,3 +47,25 @@ body, html {
     display: inline-block; /* Asegura que las imágenes se muestren en línea */
     margin: 0 10px; /* Espacio entre las imágenes */
 }
+
+.hide-elements .nav-item {
+    display: none;
+}
+
+
+
+.form-container {
+    display: grid;
+    place-items: center; /* Centro el formulario dentro del contenedor */
+    height: 85vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+    background-color: #f0f0f0; /* Color de fondo de la página */
+}
+
+.login-item {
+    width: 400px; /* Ancho del formulario */
+    border: 2px solid #ccc; /* Borde delimitado */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra para darle un efecto elevado */
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Servicios Bancarios{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <!-- Sidebar con Bootstrap -->
+            <div class="sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Detalles de la Cuenta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Transferencias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Configuraciones</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-9">
+            <h1>Bienvenido a tus Servicios Bancarios</h1>
+            {% if account %}
+            <p>Detalles de tu cuenta:</p>
+            <ul>
+                <li>Número de Cuenta: {{ account.account_number }}</li>
+                <li>Saldo: ${{ account.funds }}</li>
+                <li>Tipo de Cuenta: {{ account.get_account_type_display }}</li>
+            </ul>
+            {% else %}
+            <p>No se encontraron cuentas asociadas a tu usuario.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

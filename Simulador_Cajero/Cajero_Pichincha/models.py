@@ -7,12 +7,14 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     identification = models.CharField(max_length=20, unique=True)
     
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
 
     class Meta:
         verbose_name = 'Usuario'
         verbose_name_plural = 'Usuarios'
+
+
 
 class Account(models.Model):
     ACCOUNT_TYPE = [

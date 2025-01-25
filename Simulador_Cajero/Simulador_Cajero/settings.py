@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Cajero_Pichincha'
+    'Cajero_Pichincha.apps.CajeroPichinchaConfig',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +105,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -140,3 +144,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'Cajero_Pichincha.User'
+
+LOGIN_URL = 'Cajero_Pichincha:login'
+LOGIN_REDIRECT_URL = 'Cajero_Pichincha:display_bank_services'

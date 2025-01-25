@@ -1,0 +1,49 @@
+/* static/styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.banner-img {
+    width: 250px;
+    height: 75px; 
+    object-fit: cover;
+    object-position: center;
+}
+
+.navbar-custom {
+    height: 90px;
+    width: 100%;
+}
+
+/* Nueva clase para los enlaces de navegación */
+.nav-link-custom {
+    color: #343a40; /* Cambia el color según sea necesario */
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+.nav-link-custom:hover {
+    color: #0056b3; /* Cambia el color al pasar el ratón por encima */
+    text-decoration: underline; /* Añade el subrayado al pasar el ratón por encima */
+}
+
+.home-alert{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 120px; 
+    margin-right: 80px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.basic-service {
+    text-align: center; /* Centra el contenedor de las imágenes */
+}
+
+.basic-service img {
+    width: 300px; /* Ajusta según tus necesidades */
+    height: auto; /* Mantén la proporción de la imagen */
+    display: inline-block; /* Asegura que las imágenes se muestren en línea */
+    margin: 0 10px; /* Espacio entre las imágenes */
+}

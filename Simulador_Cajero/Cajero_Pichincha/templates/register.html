@@ -4,7 +4,9 @@
 
 {% block content %}
 <div class="container form-container">
+    <br>
     <h2>Registro de Usuario</h2>
+    <br>
     <form method="post" action="{% url 'Cajero_Pichincha:register' %}">
         {% csrf_token %}
         <div class="login-item">
@@ -38,9 +40,17 @@
                 {{ account_form.account_type }}
             </div>
             {% if user_form.errors or account_form.errors %}
-            <div class="alert alert-danger">
-                {{ user_form.errors }}
-                {{ account_form.errors }}
+            <div class="form-group">
+                <label for="{{ user_form.username.id_for_label }}">Nombre de Usuario</label>
+                {{ user_form.username }}
+                {% if user_form.username.errors %}
+                    <br>
+                    <div class="error-message alert alert-danger">
+                        {% for error in user_form.username.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
             {% endif %}
         </div>

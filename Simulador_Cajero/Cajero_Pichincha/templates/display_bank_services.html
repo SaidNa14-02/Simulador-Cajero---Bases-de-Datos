@@ -2,40 +2,44 @@
 {% block title %}Servicios Bancarios{% endblock title %}
 
 {% block content %}
-<div class="container">
+<br>
+<div class="container-fluid p-0"> <!-- Cambiado a container-fluid y p-0 -->
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-primary mb-3" id="menu-toggle" style="margin-left: 15px;">
+                <i class="fas fa-bars"></i> Menú
+            </button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-3">
-            <!-- Sidebar con Bootstrap -->
-            <div class="sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Detalles de la Cuenta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Transferencias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Configuraciones</a>
-                    </li>
-                </ul>
+            <div class="d-flex" id="wrapper">
+                <!-- Sidebar -->
+                <div class="border-end bg-white" id="sidebar-wrapper">
+                    <div class="sidebar-heading border-bottom bg-light">Servicios Bancarios</div>
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action p-3">Consulta de Saldo</a>
+                        <a href="#" class="list-group-item list-group-item-action p-3">Retiro</a>
+                        <a href="#" class="list-group-item list-group-item-action p-3">Depósito</a>
+                        <a href="#" class="list-group-item list-group-item-action p-3">Transferencias</a>
+                        <a href="#" class="list-group-item list-group-item-action p-3">Pago de servicios básicos</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-9">
             <h1>Bienvenido a tus Servicios Bancarios</h1>
             {% if account %}
-            <p>Detalles de tu cuenta:</p>
-            <ul>
-                <li>Número de Cuenta: {{ account.account_number }}</li>
-                <li>Saldo: ${{ account.funds }}</li>
-                <li>Tipo de Cuenta: {{ account.get_account_type_display }}</li>
-            </ul>
+                <p>Detalles de tu cuenta:</p>
+                <ul>
+                    <li>Número de Cuenta: {{ account.account_number }}</li>
+                    <li>Saldo: ${{ account.funds }}</li>
+                    <li>Tipo de Cuenta: {{ account.get_account_type_display }}</li>
+                </ul>
             {% else %}
-            <p>No se encontraron cuentas asociadas a tu usuario.</p>
+                
             {% endif %}
         </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock %}

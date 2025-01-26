@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserCreationForm, AccountCreationForm, LoginForm
-from .models import User, Account
+import logging
+from .models import User, Account, Transaction
 
 def index(request):
     template = loader.get_template('index.html')
@@ -24,14 +25,14 @@ def login_view(request):
 
 @login_required
 def display_bank_services(request):
-    user = request.user
-    account = Account.objects.filter(user=user).first()
-    return render(request, 'display_bank_services.html', {'account': account})
-
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-from django.contrib import messages
-import logging
+    user = User.objects.get(username=request.user)
+    account = Account.objects.get(user=request.user)
+    transactions = Transaction.objects.filter(account=account).order_by('-timestamp')[:3]
+    return render(request, 'display_bank_services.html', {
+        'user': user,
+        'account': account,
+        'transactions': transactions
+    })
 
 logger = logging.getLogger(__name__)
 

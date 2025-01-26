@@ -30,6 +30,9 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'Usuario'
         verbose_name_plural = 'Usuarios'
+        
+    def __str__(self):
+        return self.username
 
 class Account(models.Model):
     ACCOUNT_TYPE = [
@@ -112,6 +115,10 @@ class Transaction(models.Model):
         null=True,
         verbose_name='Descripción'
     )
+    destination = models.CharField(
+        max_length=100, 
+        blank=True, 
+        null=True)
 
     def __str__(self):
         return f"{self.transaction_type} - {self.amount} on {self.timestamp}"

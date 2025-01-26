@@ -16,22 +16,34 @@
     <body>
         <nav class="navbar bg-primary navbar-custom w-100">
             <div class="container-fluid d-flex justify-content-between align-items-center">
-                <a class="navbar-brand" href="{% url 'Cajero_Pichincha:index' %}">
+                <a class="navbar-brand" href="{% if user.is_authenticated %}{% url 'Cajero_Pichincha:display_bank_services' %}{% else %}{% url 'Cajero_Pichincha:index' %}{% endif %}">
                     <img src="{% static 'banner_pichincha.png' %}" alt="Pichincha Banner" title="Pichincha Banner" class="banner-img">
                 </a>
                 <div class="d-flex justify-content-end {% block navbar_class %}{% endblock navbar_class %}">
                     <ul class="nav">
                         {% if user.is_authenticated %}
+                            {% if request.path != '/display_bank_services/' %}
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-custom" style="font-size: 22px" href="{% url 'Cajero_Pichincha:display_bank_services' %}">Servicios Bancarios</a>
+                                </li>
+                            {% endif %}
                             <li class="nav-item">
-                                <a class="nav-link nav-link-custom" style="font-size: 20px" href="{% url 'Cajero_Pichincha:logout' %}">Cerrar Sesión</a>
+                                <a class="nav-link nav-link-custom" style="font-size: 22px" href="{% url 'Cajero_Pichincha:logout' %}">Cerrar Sesión</a>
                             </li>
                         {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-custom" href="{% url 'Cajero_Pichincha:login' %}">Iniciar Sesión</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-custom" href="{% url 'Cajero_Pichincha:register' %}">Registrarse</a>
-                            </li>
+                            {% if request.path == '/login/' or request.path == '/register/' %}
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-custom" style="font-size: 22px" href="{% url 'Cajero_Pichincha:index' %}">Inicio</a>
+                                </li>
+                            {% endif %}
+                            {% if request.path == '/' %}
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-custom" style="font-size: 22px" href="{% url 'Cajero_Pichincha:login' %}">Iniciar Sesión</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-custom" style="font-size: 22px" href="{% url 'Cajero_Pichincha:register' %}">Registrarse</a>
+                                </li>
+                            {% endif %}
                         {% endif %}
                     </ul>
                 </div>

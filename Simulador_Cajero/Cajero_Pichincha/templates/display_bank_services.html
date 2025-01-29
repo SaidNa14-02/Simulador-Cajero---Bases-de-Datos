@@ -18,11 +18,9 @@
                 <div class="border-end bg-white" id="sidebar-wrapper">
                     <div class="sidebar-heading border-bottom bg-secondary">Servicios Bancarios</div>
                     <div class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action p-3">Consulta de Saldo</a>
                         <a href="#" class="list-group-item list-group-item-action p-3">Retiro</a>
                         <a href="#" class="list-group-item list-group-item-action p-3">Depósito</a>
-                        <a href="#" class="list-group-item list-group-item-action p-3">Transferencias</a>
-                        <a href="#" class="list-group-item list-group-item-action p-3">Pago de servicios básicos</a>
+                        <a href="{% url 'Cajero_Pichincha:display_transfer' %}" class="list-group-item list-group-item-action p-3">Transferencias</a>
                     </div>
                 </div>
             </div>

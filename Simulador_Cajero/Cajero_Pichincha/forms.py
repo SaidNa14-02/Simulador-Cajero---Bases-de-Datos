@@ -73,3 +73,28 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].label = 'Nombre de Usuario'
         self.fields['password'].label = 'Contraseña'
+        
+class TransferForm(forms.Form):
+    account_number = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingrese el número de cuenta'
+        }),
+        label='Cuenta de destino',
+        error_messages={
+            'required': 'El número de cuenta es obligatorio',
+            'invalid': 'Número de cuenta inválido'
+        }
+    )
+    
+    amount = forms.DecimalField(
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingrese el monto a transferir'
+        }),
+        label='Monto',
+        error_messages={
+            'required': 'El monto es obligatorio',
+            'invalid': 'Monto inválido'
+        }
+    )

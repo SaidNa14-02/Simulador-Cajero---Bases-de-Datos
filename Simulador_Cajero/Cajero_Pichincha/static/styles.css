@@ -42,8 +42,8 @@ body, html {
 }
 
 .basic-service img {
-    width: 300px; /* Ajusta según tus necesidades */
-    height: auto; /* Mantén la proporción de la imagen */
+    width: 100%; /* Ajusta según tus necesidades */
+    height: 600px; /* Mantén la proporción de la imagen */
     display: inline-block; /* Asegura que las imágenes se muestren en línea */
     margin: 0 10px; /* Espacio entre las imágenes */
 }

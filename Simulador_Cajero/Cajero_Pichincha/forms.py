@@ -73,6 +73,24 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].label = 'Nombre de Usuario'
         self.fields['password'].label = 'Contraseña'
+<<<<<<< HEAD
+
+class DepositForm(forms.Form):
+    amount = forms.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        min_value=0.01,
+        label="Monto a depositar",
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa el monto'}),
+    )
+
+class WithdrawForm(forms.Form):
+    amount = forms.DecimalField(
+        label="Monto a retirar",
+        max_digits=10,
+        decimal_places=2,
+        min_value=0.01
+=======
         
 class TransferForm(forms.Form):
     account_number = forms.CharField(
@@ -97,4 +115,5 @@ class TransferForm(forms.Form):
             'required': 'El monto es obligatorio',
             'invalid': 'Monto inválido'
         }
+>>>>>>> origin/main
     )

@@ -4,7 +4,11 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+<<<<<<< HEAD
+from .forms import CustomUserCreationForm, AccountCreationForm, LoginForm, DepositForm, WithdrawForm
+=======
 from .forms import CustomUserCreationForm, AccountCreationForm, LoginForm, TransferForm
+>>>>>>> origin/main
 import logging
 from .models import User, Account, Transaction
 
@@ -68,6 +72,62 @@ def register(request):
         'user_form': user_form,
         'account_form': account_form
     })
+<<<<<<< HEAD
+
+@login_required
+def deposit(request):
+    account = Account.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = DepositForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            account.deposit(amount)
+            Transaction.objects.create(
+                account=account,
+                transaction_type='DEPOSIT',
+                amount=amount,
+            )
+            messages.success(request, f"Depósito de ${amount} realizado con éxito.")
+            return redirect('Cajero_Pichincha:display_bank_services')
+    else:
+        form = DepositForm()
+
+    return render(request, 'deposit.html', {'form': form, 'account': account})
+
+@login_required
+def withdraw(request):
+    account = Account.objects.filter(user=request.user).first()
+    
+    if not account:
+        messages.error(request, "No tienes una cuenta asociada.")
+        return redirect('Cajero_Pichincha:display_bank_services')
+
+    if request.method == "POST":
+        form = WithdrawForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+
+            if amount > account.funds:
+                messages.error(request, "Fondos insuficientes.")
+            else:
+                # Restar el dinero de la cuenta
+                account.funds -= amount
+                account.save()
+
+                # Registrar la transacción
+                Transaction.objects.create(
+                    account=account,
+                    transaction_type='withdraw',
+                    amount=amount
+                )
+
+                messages.success(request, f"Has retirado ${amount} exitosamente.")
+                return redirect('Cajero_Pichincha:display_bank_services')
+    else:
+        form = WithdrawForm()
+
+    return render(request, 'withdraw.html', {'form': form, 'account': account})
+=======
     
 @login_required
 def transfer_money(request):
@@ -118,3 +178,4 @@ def transfer_money(request):
         'destination_account': destination_account
     })
     
+>>>>>>> origin/main

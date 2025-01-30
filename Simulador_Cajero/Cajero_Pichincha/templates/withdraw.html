@@ -1,53 +1,56 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container-fluid d-flex flex-column align-items-center min-vh-100 pt-4">
-    
-    <!-- Formulario más pequeño y ubicado en la parte superior -->
-    <div class="card shadow-lg p-4 rounded text-center" style="width: 50%; max-width: 500px;">
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-5 rounded text-center" style="width: 90%; max-width: 800px;">
+
+        <!-- Título y Cantidad Arriba -->
         <h2 class="text-primary mb-3">Retiro de Fondos</h2>
         <p>Ingresa la cantidad a retirar o selecciona un monto rápido.</p>
 
-        <form method="POST">
+        <form method="POST" class="py-4">
             {% csrf_token %}
             
-            <div class="mb-3">
-                <label for="amount" class="form-label fs-5">Cantidad a retirar</label>
-                <input type="number" id="amount" name="amount" class="form-control text-center small-input" min="1" required>
+            <div class="mb-4">
+                <label for="amount" class="form-label fs-4">Cantidad a retirar</label>
+                <div class="d-flex justify-content-center">
+                    <input type="number" id="amount" name="amount" class="form-control text-center small-input" min="1" required>
+                </div>
             </div>
 
             <!-- Pregunta sobre el recibo -->
-            <div class="mb-3">
-                <label class="form-label fs-6">¿Desea imprimir un recibo por $0.36 adicionales?</label>
-                <select name="print_receipt" id="print_receipt" class="form-select">
-                    <option value="no" selected>No</option>
-                    <option value="yes">Sí</option>
-                </select>
+            <div class="mb-4">
+                <label class="form-label fs-5">¿Desea imprimir un recibo por $0.36 adicionales?</label>
+                <div class="d-flex justify-content-center">
+                    <select name="print_receipt" id="print_receipt" class="form-select w-50">
+                        <option value="no" selected>No</option>
+                        <option value="yes">Sí</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="mt-3">
-                <button type="submit" class="btn btn-success btn-lg px-4">Confirmar Retiro</button>
-                <a href="{% url 'Cajero_Pichincha:display_bank_services' %}" class="btn btn-secondary btn-lg px-4">Cancelar</a>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success btn-lg px-5 py-2">Confirmar Retiro</button>
+                <a href="{% url 'Cajero_Pichincha:display_bank_services' %}" class="btn btn-secondary btn-lg px-5 py-2">Cancelar</a>
             </div>
         </form>
+
+    </div>
+</div>
+
+<!-- Botones de Retiros Rápidos -->
+<div class="withdraw-buttons">
+    <div class="left-buttons">
+        <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3" data-amount="10">$10</button>
+        <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3" data-amount="20">$20</button>
+        <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3" data-amount="30">$30</button>
     </div>
 
-    <!-- Botones de Retiros Rápidos en la parte inferior -->
-    <div class="withdraw-buttons mt-auto mb-5">
-        <div class="row w-100 justify-content-between">
-            <div class="col-4 d-flex flex-column align-items-start">
-                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="10">$10</button>
-                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="20">$20</button>
-                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="30">$30</button>
-            </div>
-            <div class="col-4 d-flex flex-column align-items-end">
-                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="40">$40</button>
-                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="50">$50</button>
-                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="100">$100</button>
-            </div>
-        </div>
+    <div class="right-buttons">
+        <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3" data-amount="40">$40</button>
+        <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3" data-amount="50">$50</button>
+        <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3" data-amount="100">$100</button>
     </div>
-
 </div>
 
 <style>
@@ -58,25 +61,34 @@
     .card {
         border-radius: 20px;
         background-color: #ffffff;
+        padding: 40px;
     }
     /* Input más pequeño */
     .small-input {
         width: 150px !important;
-        padding: 8px;
-        font-size: 1rem;
+        padding: 10px;
+        font-size: 1.2rem;
         border-radius: 8px;
         border: 2px solid #ccc;
     }
     /* Contenedor de botones de retiro rápido */
     .withdraw-buttons {
+        position: absolute;
+        top: 50%;
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        padding: 0 50px;
+    }
+    .left-buttons, .right-buttons {
+        display: flex;
+        flex-direction: column;
     }
     /* Botones de retiro rápido */
     .quick-withdraw {
-        height: 50px;
-        font-size: 1.2rem;
+        width: 120px;
+        height: 60px;
     }
 </style>
 

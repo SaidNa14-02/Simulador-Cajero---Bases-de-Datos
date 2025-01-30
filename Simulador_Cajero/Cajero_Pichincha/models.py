@@ -64,6 +64,13 @@ class Account(models.Model):
         verbose_name='Saldo'
     )
 
+    def deposit(self, amount):
+        self.funds += amount
+        self.save()
+
+    def __str__(self):
+        return f"{self.user.username} - {self.account_number}"
+
     def save(self, *args, **kwargs):
         if not self.account_number:
             while True:

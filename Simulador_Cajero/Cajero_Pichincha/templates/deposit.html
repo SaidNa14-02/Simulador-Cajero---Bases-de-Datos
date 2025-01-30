@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Depósito{% endblock title %}
+
+{% block content %}
+<div class="container form-container">
+    <h2>Realizar Depósito</h2>
+    <p>Cuenta: {{ account.account_number }}</p>
+    <p>Saldo actual: ${{ account.funds }}</p>
+    <form method="post" action="{% url 'Cajero_Pichincha:deposit' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Depositar</button>
+    </form>
+</div>
+{% endblock content %}

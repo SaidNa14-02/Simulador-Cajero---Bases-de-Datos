@@ -1,0 +1,104 @@
+{% extends 'Cajero_Pichincha/base.html' %}
+
+{% block content %}
+<div class="container-fluid d-flex flex-column align-items-center min-vh-100 pt-4">
+    
+    <!-- Formulario más pequeño y ubicado en la parte superior -->
+    <div class="card shadow-lg p-4 rounded text-center" style="width: 50%; max-width: 500px;">
+        <h2 class="text-primary mb-3">Retiro de Fondos</h2>
+        <p>Ingresa la cantidad a retirar o selecciona un monto rápido.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="amount" class="form-label fs-5">Cantidad a retirar</label>
+                <input type="number" id="amount" name="amount" class="form-control text-center small-input" min="1" required>
+            </div>
+
+            <!-- Pregunta sobre el recibo -->
+            <div class="mb-3">
+                <label class="form-label fs-6">¿Desea imprimir un recibo por $0.36 adicionales?</label>
+                <select name="print_receipt" id="print_receipt" class="form-select">
+                    <option value="no" selected>No</option>
+                    <option value="yes">Sí</option>
+                </select>
+            </div>
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-success btn-lg px-4">Confirmar Retiro</button>
+                <a href="{% url 'Cajero_Pichincha:display_bank_services' %}" class="btn btn-secondary btn-lg px-4">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Botones de Retiros Rápidos en la parte inferior -->
+    <div class="withdraw-buttons mt-auto mb-5">
+        <div class="row w-100 justify-content-between">
+            <div class="col-4 d-flex flex-column align-items-start">
+                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="10">$10</button>
+                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="20">$20</button>
+                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="30">$30</button>
+            </div>
+            <div class="col-4 d-flex flex-column align-items-end">
+                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="40">$40</button>
+                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="50">$50</button>
+                <button class="btn btn-outline-primary btn-lg quick-withdraw mb-3 w-75" data-amount="100">$100</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    /* Estilización general */
+    body {
+        background-color: #f4f4f4;
+    }
+    .card {
+        border-radius: 20px;
+        background-color: #ffffff;
+    }
+    /* Input más pequeño */
+    .small-input {
+        width: 150px !important;
+        padding: 8px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 2px solid #ccc;
+    }
+    /* Contenedor de botones de retiro rápido */
+    .withdraw-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    /* Botones de retiro rápido */
+    .quick-withdraw {
+        height: 50px;
+        font-size: 1.2rem;
+    }
+</style>
+
+<script>
+    // Script para seleccionar la cantidad automáticamente en el input
+    document.addEventListener("DOMContentLoaded", function () {
+        const quickWithdrawButtons = document.querySelectorAll(".quick-withdraw");
+        const amountInput = document.getElementById("amount");
+        
+        quickWithdrawButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                amountInput.value = this.getAttribute("data-amount");
+            });
+        });
+    });
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+

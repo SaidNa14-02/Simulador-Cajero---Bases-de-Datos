@@ -19,8 +19,8 @@
                     <div class="sidebar-heading border-bottom bg-secondary">Servicios Bancarios</div>
                     <div class="list-group list-group-flush">
                         <a href="#" class="list-group-item list-group-item-action p-3">Consulta de Saldo</a>
-                        <a href="#" class="list-group-item list-group-item-action p-3">Retiro</a>
-                        <a href="#" class="list-group-item list-group-item-action p-3">Depósito</a>
+                        <a href="{% url 'Cajero_Pichincha:withdraw' %}" class="list-group-item list-group-item-action p-3">Retiro</a>
+                        <a href="{% url 'Cajero_Pichincha:deposit' %}" class="list-group-item list-group-item-action p-3">Depósito</a>
                         <a href="#" class="list-group-item list-group-item-action p-3">Transferencias</a>
                         <a href="#" class="list-group-item list-group-item-action p-3">Pago de servicios básicos</a>
                     </div>

@@ -4,7 +4,11 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+<<<<<<< HEAD
 from .forms import CustomUserCreationForm, AccountCreationForm, LoginForm, DepositForm, WithdrawForm
+=======
+from .forms import CustomUserCreationForm, AccountCreationForm, LoginForm, TransferForm
+>>>>>>> origin/main
 import logging
 from .models import User, Account, Transaction
 
@@ -34,7 +38,8 @@ def display_bank_services(request):
         'transactions': transactions
     })
 
-logger = logging.getLogger(__name__)
+    logger = logging.getLogger(__name__)
+    
 
 def logout_view(request):
     print("Iniciando proceso de logout")  # Debug
@@ -67,6 +72,7 @@ def register(request):
         'user_form': user_form,
         'account_form': account_form
     })
+<<<<<<< HEAD
 
 @login_required
 def deposit(request):
@@ -121,3 +127,55 @@ def withdraw(request):
         form = WithdrawForm()
 
     return render(request, 'withdraw.html', {'form': form, 'account': account})
+=======
+    
+@login_required
+def transfer_money(request):
+    account = Account.objects.get(user=request.user)
+    destination_account = None
+
+    if request.method == 'POST':
+        transfer_form = TransferForm(request.POST)
+        if transfer_form.is_valid():
+            try:
+                amount = transfer_form.cleaned_data['amount']
+                account_number = transfer_form.cleaned_data['account_number']
+                destination_account = Account.objects.get(account_number=account_number)
+                
+                if account.funds >= amount:
+                    account.funds -= amount
+                    destination_account.funds += amount
+                    
+                    account.save()
+                    destination_account.save()
+                    
+                    Transaction.objects.create(
+                        account=account,
+                        transaction_type='TRANSFERENCIA',
+                        amount=amount,
+                        destination=account_number
+                    )
+                    
+                    return redirect('Cajero_Pichincha:display_bank_services')
+                else:
+                    transfer_form.add_error('amount', 'Fondos insuficientes')
+                    
+            except Account.DoesNotExist:
+                transfer_form.add_error('account_number', 'La cuenta destino no existe')
+    else:
+        transfer_form = TransferForm()
+        # Verificar cuenta destino cuando se ingresa
+        account_number = request.GET.get('account_number')
+        if account_number:
+            try:
+                destination_account = Account.objects.get(account_number=account_number)
+            except Account.DoesNotExist:
+                pass
+
+    return render(request, 'display_transfer.html', {
+        'transfer_form': transfer_form,
+        'account': account,
+        'destination_account': destination_account
+    })
+    
+>>>>>>> origin/main

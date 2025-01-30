@@ -151,7 +151,7 @@ class Service(models.Model):
         verbose_name='Tipo de servicio'
     )
     bill_number = models.CharField(
-        max_length=50,
+        max_length=10,
         verbose_name='Número de factura'
     )
     amount = models.DecimalField(
